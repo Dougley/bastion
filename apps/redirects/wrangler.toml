@@ -1,0 +1,21 @@
+compatibility_date = "2022-10-22"
+
+main = "src/index.ts"
+name = "bastion-redirects"
+workers_dev = false
+
+routes = ["dgl.ee/wot/*"]
+
+[[rules]]
+type = "ESModule"
+globs = [ "**/*.ts" ]
+
+[[kv_namespaces]]
+binding = "KV"
+id = "ff4da80f1e42471db838c38e8e73a3ed"
+preview_id = "ff4da80f1e42471db838c38e8e73a3ed"
+
+[vars]
+DISCORD_CLIENT_ID = "1033754043660652605"
+DISCORD_PUBLIC_KEY = "83d359bdc4060bb6142519f1a20bbf245cdfc0312576f7ac39ef072b15ccf73a"
+SENTRY_DSN = "https://5bdd25b0ae7244f38df02bdff8620764@o128201.ingest.sentry.io/4504197822087168"

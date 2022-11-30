@@ -1,0 +1,18 @@
+{
+  "extends": "tsconfig/workers.json",
+  "include": [
+    "**/*.tsx",
+    "**/*.ts",
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "compilerOptions": {
+    // For Slshx JSX
+    "jsx": "react",
+    "jsxFactory": "createElement",
+    "jsxFragmentFactory": "Fragment",
+    // Required by esbuild
+    "isolatedModules": true,
+  }
+}
