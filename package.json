@@ -9,6 +9,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
+    "@changesets/cli": "^2.25.2",
     "eslint": "^8.26.0",
     "eslint-config-custom": "workspace:*",
     "prettier": "latest",
@@ -17,6 +18,5 @@
   "engines": {
     "node": ">=14.0.0"
   },
-  "dependencies": {},
   "packageManager": "pnpm@7.17.1"
 }
