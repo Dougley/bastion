@@ -17,8 +17,8 @@ export function discordExchange(): MiddlewareHandler<
           "Content-Type": "application/x-www-form-urlencoded",
         },
         body: new URLSearchParams({
-          client_id: "1047607535269597254",
-          client_secret: "NsBh4PPJmpfuZplU2JtnUlrLiDGxqb16",
+          client_id: ctx.env.DISCORD_CLIENT_ID,
+          client_secret: ctx.env.DISCORD_CLIENT_SECRET,
           grant_type: "authorization_code",
           code,
           redirect_uri: `${currentBase}/discord/callback`,

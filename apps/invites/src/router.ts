@@ -58,7 +58,7 @@ router.get("/wot/:invite", async (ctx) => {
     }),
     key
   );
-  url.searchParams.set("client_id", "1047607535269597254");
+  url.searchParams.set("client_id", ctx.env.DISCORD_CLIENT_ID);
   url.searchParams.set("scope", "identify guilds.join");
   url.searchParams.set("prompt", "consent");
   url.searchParams.set(
@@ -99,11 +99,11 @@ router.get(
       return ctx.text("Invalid invite code", 404);
     }
     const guildJoin = await fetch(
-      `https://discord.com/api/guilds/1034462346908794910/members/${user.id}`,
+      `https://discord.com/api/guilds/${ctx.env.DISCORD_SERVER_ID}/members/${user.id}`,
       {
         method: "PUT",
         headers: {
-          authorization: `Bot MTA0NzYwNzUzNTI2OTU5NzI1NA.GoYTiw.VZ4UT2NmiusZq4droKTe1OHOVZIAM0i9NFJ_js`,
+          authorization: `Bot ${ctx.env.DISCORD_BOT_TOKEN}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
@@ -134,7 +134,8 @@ router.get(
       .insertInto("members")
       .values({
         id: user.id,
-        invited_with: state.invite,
+        invited_with: invite.id,
+        joined_at: new Date().toISOString(),
       })
       .execute();
     return ctx.text("Joined guild");

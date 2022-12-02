@@ -22,3 +22,13 @@ migrations_dir = "../../packages/database/migrations"
 binding = "KV"
 id = "ff4da80f1e42471db838c38e8e73a3ed"
 preview_id = "ff4da80f1e42471db838c38e8e73a3ed"
+
+[vars]
+DISCORD_CLIENT_ID = "859000000000000000"
+DISCORD_SERVER_ID = "859000000000000000"
+
+# The necessary secrets are:
+# - DISCORD_CLIENT_SECRET
+# - DISCORD_BOT_TOKEN
+
+# Run `echo <VALUE> | wrangler secret put <NAME>` for each of these

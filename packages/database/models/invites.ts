@@ -13,6 +13,6 @@ export interface Invite {
   usable: ColumnType<boolean, boolean | undefined, boolean>;
   uses: ColumnType<number, number | undefined, number>;
   max_uses: ColumnType<number, number | undefined, number>;
-  created_at: ColumnType<Date, string | undefined, never>;
-  updated_at: ColumnType<Date, string | undefined, string>;
+  created_at: ColumnType<Date, string, never>;
+  updated_at: ColumnType<Date, string, string>;
 }

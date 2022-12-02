@@ -6,5 +6,9 @@ interface Env {
   DB: D1Database;
   KV: KVNamespace;
   SENTRY_DSN: string;
+  DISCORD_CLIENT_ID: string;
+  DISCORD_CLIENT_SECRET: string;
+  DISCORD_BOT_TOKEN: string;
+  DISCORD_SERVER_ID: string;
   DEV?: boolean;
 }
