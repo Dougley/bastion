@@ -6,7 +6,6 @@ import {
   Message,
 } from "slshx";
 
-// `Env` contains bindings and is declared in types/env.d.ts
 export function add(): CommandHandler<Env> {
   useDescription("Adds two numbers together");
   const a = useNumber("a", "1st number", { required: true });

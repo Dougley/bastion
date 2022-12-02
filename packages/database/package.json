@@ -1,0 +1,17 @@
+{
+  "name": "database",
+  "version": "0.0.0",
+  "main": "index.ts",
+  "files": [
+    "./migrations",
+    "index.ts",
+    "schema.ts"
+  ],
+  "dependencies": {
+    "kysely": "^0.22.0"
+  },
+  "peerDependencies": {
+    "kysely": "*",
+    "kysely-d1": "*"
+  }
+}

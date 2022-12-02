@@ -8,9 +8,7 @@
     "lib": ["esnext"],
     "strict": true,
     "sourceMap": true,
-    "types": [
-      "@cloudflare/workers-types"
-    ],
+    "types": ["@cloudflare/workers-types", "worker-env"],
     "outDir": "./dist"
   },
   "include": ["src"],

@@ -1,0 +1,21 @@
+-- Migration number: 0000 	 2022-12-01T20:01:41.707Z
+
+DROP TABLE IF EXISTS members;
+DROP TABLE IF EXISTS invites;
+
+CREATE TABLE members (
+  id TEXT PRIMARY KEY,
+  invited_with INTEGER REFERENCES invites(id),
+  invites INT NOT NULL DEFAULT 0,
+  joined_at TEXT NOT NULL
+);
+
+CREATE TABLE invites (
+  id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+  code VARCHAR(255) NOT NULL,
+  owner_id TEXT NOT NULL REFERENCES members(id) ON DELETE CASCADE,
+  uses INT NOT NULL DEFAULT 0,
+  max_uses INT NOT NULL DEFAULT 1,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);

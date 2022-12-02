@@ -9,11 +9,14 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
+    "@changesets/changelog-github": "^0.4.7",
     "@changesets/cli": "^2.25.2",
     "eslint": "^8.26.0",
     "eslint-config-custom": "workspace:*",
     "prettier": "latest",
-    "turbo": "latest"
+    "tsconfig": "^7.0.0",
+    "turbo": "latest",
+    "worker-env": "workspace:^0.0.0"
   },
   "engines": {
     "node": ">=14.0.0"

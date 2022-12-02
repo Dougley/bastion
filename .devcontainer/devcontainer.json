@@ -12,7 +12,7 @@
     "dbaeumer.vscode-eslint",
 		"IronGeek.vscode-env"
   ],
-  "postCreateCommand": "pnpm install"
+  "postCreateCommand": "pnpm install --frozen-lockfile"
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},

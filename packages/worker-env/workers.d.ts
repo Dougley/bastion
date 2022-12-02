@@ -3,4 +3,8 @@ interface Env {
   // KV_NAMESPACE: KVNamespace;
   // DURABLE_OBJECT: DurableObjectNamespace;
   // SECRET: string;
+  DB: D1Database;
+  KV: KVNamespace;
+  SENTRY_DSN: string;
+  DEV?: boolean;
 }

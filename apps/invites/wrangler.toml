@@ -1,0 +1,24 @@
+compatibility_date = "2022-10-22"
+
+main = "src/index.ts"
+name = "bastion-invites"
+workers_dev = true
+
+#routes = ["dgl.ee/wot/*"]
+
+[[rules]]
+type = "ESModule"
+globs = [ "**/*.ts" ]
+
+[[ d1_databases ]]
+binding = "DB"
+database_name = "bastion-slshx"
+database_id  = "bc179a07-0bdd-4b2b-8b25-57dc5e077f9f"
+preview_database_id = "bc179a07-0bdd-4b2b-8b25-57dc5e077f9f"
+migrations_table = "migrations"
+migrations_dir = "../../packages/database/migrations"
+
+[[kv_namespaces]]
+binding = "KV"
+id = "ff4da80f1e42471db838c38e8e73a3ed"
+preview_id = "ff4da80f1e42471db838c38e8e73a3ed"

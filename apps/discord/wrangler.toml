@@ -7,8 +7,13 @@ workers_dev = true
 compatibility_date = "2022-08-07"
 compatibility_flags = []
 
-[build]
-command = "node scripts/build.js production"
+[[ d1_databases ]]
+binding = "DB"
+database_name = "bastion-slshx"
+database_id  = "bc179a07-0bdd-4b2b-8b25-57dc5e077f9f"
+preview_database_id = "bc179a07-0bdd-4b2b-8b25-57dc5e077f9f"
+migrations_table = "migrations"
+migrations_dir = "../../packages/database/migrations"
 
 [env.development.build]
 command = "node scripts/build.js development"
