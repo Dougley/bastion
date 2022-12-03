@@ -2,6 +2,7 @@
 
 <p align="center">
 <img src="https://forthebadge.com/images/badges/60-percent-of-the-time-works-every-time.svg"></p>
+
 ---
 
 Bastion is a simple yet effective way to build a "web of trust" for Discord servers.
