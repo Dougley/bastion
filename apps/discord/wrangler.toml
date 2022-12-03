@@ -15,6 +15,13 @@ preview_database_id = "bc179a07-0bdd-4b2b-8b25-57dc5e077f9f"
 migrations_table = "migrations"
 migrations_dir = "../../packages/database/migrations"
 
+[[env.development.d1_databases]]
+binding = "DB"
+database_name = "bastion-slshx"
+database_id  = "bc179a07-0bdd-4b2b-8b25-57dc5e077f9f"
+preview_database_id = "bc179a07-0bdd-4b2b-8b25-57dc5e077f9f"
+migrations_table = "migrations"
+migrations_dir = "../../packages/database/migrations"
 [env.development.build]
 command = "node scripts/build.js development"
 [env.development.build.upload] # Required by Miniflare
@@ -26,3 +33,6 @@ kv_persist = true
 cache_persist = true
 durable_objects_persist = true
 global_async_io = true # Required by Slshx
+
+[vars]
+INVITE_SITE = "http://localhost:8787"

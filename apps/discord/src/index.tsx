@@ -1,5 +1,6 @@
 import { createHandler } from "slshx";
-import * as Commands from "./commands";
+import * as SlashCommands from "./commands/slash";
+import * as UserContextCommands from "./commands/user";
 
 const handler = createHandler({
   // Replaced by esbuild when bundling, see scripts/build.js (do not edit)
@@ -7,7 +8,10 @@ const handler = createHandler({
   applicationPublicKey: SLSHX_APPLICATION_PUBLIC_KEY,
   applicationSecret: SLSHX_APPLICATION_SECRET,
   testServerId: SLSHX_TEST_SERVER_ID,
-  commands: { ...Commands },
+  commands: { ...SlashCommands },
+  userCommands: {
+    'Invited By': UserContextCommands.getInvitedBy,
+  }
 });
 
 export default { fetch: handler };
