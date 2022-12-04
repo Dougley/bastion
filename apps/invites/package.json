@@ -6,7 +6,8 @@
   "main": "src/index.ts",
   "scripts": {
     "dev": "wrangler dev --var DEV:1",
-    "migrations": "wrangler d1 migrations apply bastion-slshx"
+    "migrations": "wrangler d1 migrations apply bastion-slshx",
+    "format": "prettier --write \"**/*.{js,ts,jsx,tsx}\""
   },
   "author": "Remco Jongschaap <hey@dougley.com>",
   "license": "MIT",

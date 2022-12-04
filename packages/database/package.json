@@ -7,6 +7,9 @@
     "index.ts",
     "schema.ts"
   ],
+  "scripts": {
+    "format": "prettier --write \"**/*.{js,ts,jsx,tsx}\""
+  },
   "dependencies": {
     "kysely": "^0.22.0"
   },

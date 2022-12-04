@@ -3,6 +3,9 @@
   "name": "eslint-config-custom",
   "version": "0.0.0",
   "main": "index.js",
+  "scripts": {
+    "format": "prettier --write \"**/*.{js,ts,jsx,tsx}\""
+  },
   "license": "MIT",
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^5.40.1",

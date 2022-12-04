@@ -7,7 +7,8 @@
   "main": "src/index.ts",
   "scripts": {
     "dev": "miniflare --watch --debug --wrangler-env=development",
-    "deploy:global": "node --no-warnings --experimental-vm-modules scripts/deploy.js"
+    "deploy:global": "node --no-warnings --experimental-vm-modules scripts/deploy.js",
+    "format": "prettier --write \"**/*.{js,ts,jsx,tsx}\""
   },
   "author": "Remco Jongschaap <hey@dougley.com>",
   "license": "MIT",
