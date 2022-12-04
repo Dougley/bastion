@@ -11,7 +11,7 @@ importers:
       prettier: latest
       tsconfig: ^7.0.0
       turbo: latest
-      worker-env: workspace:^0.0.0
+      worker-env: workspace:^0.1.0
     devDependencies:
       '@changesets/changelog-github': 0.4.7
       '@changesets/cli': 2.25.2
@@ -26,7 +26,7 @@ importers:
     specifiers:
       '@cloudflare/workers-types': ^3.18.0
       '@types/service-worker-mock': ^2.0.1
-      database: workspace:^0.0.0
+      database: workspace:^0.1.0
       discord-api-types: ^0.37.18
       esbuild: ^0.14.8
       eslint-config-custom: workspace:*
@@ -38,7 +38,7 @@ importers:
       toucan-js: ^2.7.0
       tsconfig: workspace:*
       typescript: ^4.9.3
-      worker-env: workspace:^0.0.0
+      worker-env: workspace:^0.1.0
       wrangler: ^2.5.0
     dependencies:
       database: link:../../packages/database
@@ -64,7 +64,7 @@ importers:
       '@cloudflare/workers-types': ^3.18.0
       '@honojs/sentry': ^0.0.3
       '@types/service-worker-mock': ^2.0.1
-      database: workspace:^0.0.0
+      database: workspace:^0.1.0
       discord-api-types: ^0.37.20
       eslint-config-custom: workspace:*
       hono: ^2.5.7
@@ -73,7 +73,7 @@ importers:
       service-worker-mock: ^2.0.5
       tsconfig: workspace:*
       typescript: ^4.9.3
-      worker-env: workspace:^0.0.0
+      worker-env: workspace:^0.1.0
       wrangler: ^2.4.4
     dependencies:
       '@honojs/sentry': 0.0.3
@@ -124,7 +124,7 @@ importers:
   packages/worker-env:
     specifiers:
       '@cloudflare/workers-types': ^3.18.0
-      tsconfig: workspace:^0.0.0
+      tsconfig: workspace:^0.1.0
     dependencies:
       '@cloudflare/workers-types': 3.18.0
     devDependencies:
