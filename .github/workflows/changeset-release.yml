@@ -17,7 +17,30 @@ jobs:
         with:
           fetch-depth: 0
 
+      - uses: pnpm/action-setup@v2
+        with:
+          version: latest
+
+      - name: Setup Node.js 18.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18.3
+          cache: 'pnpm'
+
       - name: Create Release Pull Request
         uses: changesets/action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update lockfile
+        run: pnpm install --only-lockfile
+
+      - name: Commit lockfile if changed
+        run: |
+          if [[ -n $(git status --porcelain) ]]; then
+            git add pnpm-lock.yaml
+            git config user.name "GitHub Actions"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git commit -m "chore: update lockfile"
+            git push
+          fi
