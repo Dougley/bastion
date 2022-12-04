@@ -33,7 +33,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update lockfile
-        run: pnpm install --only-lockfile
+        run: pnpm install --lockfile-only
 
       - name: Commit lockfile if changed
         run: |
