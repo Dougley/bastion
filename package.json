@@ -16,7 +16,7 @@
     "prettier": "latest",
     "tsconfig": "^7.0.0",
     "turbo": "latest",
-    "worker-env": "workspace:^0.0.0"
+    "worker-env": "workspace:^0.1.0"
   },
   "engines": {
     "node": ">=14.0.0"
