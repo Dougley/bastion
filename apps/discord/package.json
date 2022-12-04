@@ -1,7 +1,7 @@
 {
   "name": "discord",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "description": "",
   "main": "src/index.ts",
@@ -22,11 +22,11 @@
     "service-worker-mock": "^2.0.5",
     "tsconfig": "workspace:*",
     "typescript": "^4.9.3",
-    "worker-env": "workspace:^0.0.0",
+    "worker-env": "workspace:^0.1.0",
     "wrangler": "^2.5.0"
   },
   "dependencies": {
-    "database": "workspace:^0.0.0",
+    "database": "workspace:^0.1.0",
     "kysely": "^0.22.0",
     "kysely-d1": "^0.0.6",
     "slshx": "^0.3.0",
