@@ -18,9 +18,26 @@ export function createinvite(): CommandHandler<Env> {
     //     </Message>
     //   )
     // }
-      
+
     // generate a random string of 6 alphanumeric characters
     const code = Math.random().toString(36).slice(-6);
+    // seed users if they don't exist
+    if (
+      !(await db
+        .selectFrom("members")
+        .where("id", "=", interaction.member!.user.id)
+        .selectAll()
+        .executeTakeFirst())
+    ) {
+      await db
+        .insertInto("members")
+        .values({
+          id: interaction.member!.user.id,
+          joined_at: new Date(interaction.member!.joined_at).toISOString(),
+          invited_with: null,
+        })
+        .execute();
+    }
     await db
       .insertInto("invites")
       .values({
@@ -32,8 +49,8 @@ export function createinvite(): CommandHandler<Env> {
       .execute();
     return (
       <Message ephemeral>
-        Your invite is *{`${env.INVITE_SITE}/${code}`}**{"\n\n"}This invite
-        is single use, and will expire in 24 hours. Please remember you bear
+        Your invite is **{`${env.INVITE_SITE}/${code}`}**{"\n\n"}This invite is
+        single use, and is valid indefinitly. Please remember you bear
         responsibility for who you invite.
       </Message>
     );

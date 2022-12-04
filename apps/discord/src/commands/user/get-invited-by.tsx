@@ -17,7 +17,7 @@ export function getInvitedBy(): UserCommandHandler<Env> {
         .select(["i.code", "m.id"])
         .executeTakeFirst();
       console.log(user);
-      if (!user) {
+      if (!user || !user.code) {
         return <Message>This user was not invited by anyone.</Message>;
       }
       return (

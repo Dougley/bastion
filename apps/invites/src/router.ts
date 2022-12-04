@@ -23,7 +23,7 @@ router.get("/", async (ctx) => {
   return ctx.redirect("https://github.com/Dougley/bastion");
 });
 
-router.get("/wot/:invite", async (ctx) => {
+router.get("/:invite", async (ctx) => {
   const db = new Kysely<Database>({
     dialect: new D1Dialect({ database: ctx.env.DB }),
   });
