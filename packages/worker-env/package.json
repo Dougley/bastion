@@ -1,13 +1,13 @@
 {
   "name": "worker-env",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "files": [
     "workers.d.ts"
   ],
   "types": "./workers.d.ts",
   "devDependencies": {
-    "tsconfig": "workspace:^0.0.0"
+    "tsconfig": "workspace:^0.1.0"
   },
   "dependencies": {
     "@cloudflare/workers-types": "^3.18.0"
