@@ -14,7 +14,7 @@
     "eslint": "^8.26.0",
     "eslint-config-custom": "workspace:*",
     "prettier": "latest",
-    "tsconfig": "^7.0.0",
+    "tsconfig": "workspace:0.1.0",
     "turbo": "latest",
     "worker-env": "workspace:^0.1.0"
   },

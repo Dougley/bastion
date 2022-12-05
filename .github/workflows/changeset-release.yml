@@ -29,6 +29,8 @@ jobs:
 
       - name: Create Release Pull Request
         uses: changesets/action@v1
+        with:
+          createGithubReleases: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -36,11 +38,12 @@ jobs:
         run: pnpm install --lockfile-only
 
       - name: Commit lockfile if changed
+        if: steps.changesets.outputs.pullRequestNumber != ''
         run: |
           if [[ -n $(git status --porcelain) ]]; then
             git add pnpm-lock.yaml
             git config user.name "GitHub Actions"
             git config user.email "github-actions[bot]@users.noreply.github.com"
             git commit -m "chore: update lockfile"
-            git push
+            git push origin changeset-release/main
           fi
