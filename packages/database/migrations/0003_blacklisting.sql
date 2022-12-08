@@ -1,0 +1,4 @@
+-- Migration number: 0003 	 2022-12-08T19:09:06.351Z
+
+ALTER TABLE members ADD COLUMN blacklisted BOOLEAN NOT NULL DEFAULT FALSE;
+ALTER TABLE members ADD COLUMN blacklisted_by TEXT REFERENCES members(id);
