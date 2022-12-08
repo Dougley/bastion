@@ -10,7 +10,7 @@ import { sign } from "./crypto/sign";
 import { APIUser } from "discord-api-types/v9";
 import { discordExchange } from "./middleware/discord-exchange";
 
-const router = new Hono<{ Bindings: Env }, "/wot">();
+const router = new Hono<{ Bindings: Env }>();
 
 router.use("*", logger());
 router.use("*", (c, next) => {
