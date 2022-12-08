@@ -12,6 +12,7 @@ const handler = createHandler({
   commands: { ...SlashCommands },
   userCommands: {
     "Invited By": UserContextCommands.getInvitedBy,
+    "User Info": UserContextCommands.userInfo,
   },
 });
 

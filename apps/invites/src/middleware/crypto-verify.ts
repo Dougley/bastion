@@ -20,7 +20,7 @@ export function verifyPayload(): MiddlewareHandler<string, { Bindings: Env }> {
       }
       const key = await importKey(storedKey);
       const verified = await verify(
-        JSON.stringify({ ts: state.ts, invite: state.invite }),
+        JSON.stringify({ ts: state.ts }),
         state.sig,
         key
       );

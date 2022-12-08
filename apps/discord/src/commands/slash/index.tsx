@@ -1,3 +1,3 @@
 export * from "./ping";
-export * from "./create-invite";
-export * from "./create-custom-invite";
+export * from "./whitelist";
+export * from "./blacklist";

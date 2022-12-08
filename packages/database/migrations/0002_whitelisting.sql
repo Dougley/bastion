@@ -6,7 +6,7 @@ ALTER TABLE members ADD COLUMN whitelisted_by TEXT REFERENCES members(id);
 UPDATE members SET whitelisted = TRUE;
 UPDATE members SET whitelisted_by = (
   SELECT owner_id FROM invites WHERE id = invited_with
-)
+);
 
 ALTER TABLE members DROP COLUMN invited_with;
 DROP TABLE IF EXISTS invites;

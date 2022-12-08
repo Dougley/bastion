@@ -20,21 +20,6 @@ router.use("*", (c, next) => {
 });
 
 router.get("/", async (ctx) => {
-  return ctx.redirect("https://github.com/Dougley/bastion");
-});
-
-router.get("/:invite", async (ctx) => {
-  const db = new Kysely<Database>({
-    dialect: new D1Dialect({ database: ctx.env.DB }),
-  });
-  const invite = await db
-    .selectFrom("invites")
-    .selectAll()
-    .where("code", "=", ctx.req.param("invite"))
-    .executeTakeFirst();
-  if (!invite || !invite.usable) {
-    return ctx.text("Invalid invite code", 404);
-  }
   const url = new URL("https://discord.com/oauth2/authorize");
   let storedKey = await ctx.env.KV.get("key");
   if (!storedKey) {
@@ -54,7 +39,6 @@ router.get("/:invite", async (ctx) => {
   const sig = await sign(
     JSON.stringify({
       ts: Date.now(),
-      invite: ctx.req.param("invite"),
     }),
     key
   );
@@ -66,7 +50,6 @@ router.get("/:invite", async (ctx) => {
     btoa(
       JSON.stringify({
         ts: Date.now(),
-        invite: invite.code,
         sig: sig,
       })
     )
@@ -87,16 +70,15 @@ router.get(
     const db = new Kysely<Database>({
       dialect: new D1Dialect({ database: ctx.env.DB }),
     });
-    const access_token = ctx.get("access_token");
+    const access_token = ctx.get("access_token") as string;
     const user = ctx.get("user") as APIUser;
-    const state = JSON.parse(atob(ctx.req.query("state")));
-    const invite = await db
-      .selectFrom("invites")
-      .selectAll()
-      .where("code", "=", state.invite)
+    const member = await db
+      .selectFrom("members")
+      .select(["whitelisted", "blacklisted", "whitelisted_by"])
+      .where("id", "=", user.id)
       .executeTakeFirst();
-    if (!invite) {
-      return ctx.text("Invalid invite code", 404);
+    if (!member || !member.whitelisted || member.blacklisted) {
+      return ctx.text("You are not whitelisted", 403);
     }
     const guildJoin = await fetch(
       `https://discord.com/api/guilds/${ctx.env.DISCORD_SERVER_ID}/members/${user.id}`,
@@ -114,29 +96,12 @@ router.get(
     if (!guildJoin.ok) {
       return ctx.text("Failed to join guild", 500);
     }
-    if (invite.uses + 1 >= invite.max_uses) {
-      await db
-        .updateTable("invites")
-        .set({ usable: false })
-        .where("code", "=", invite.code)
-        .execute();
-    }
     await db
-      .updateTable("invites")
+      .updateTable("members")
       .set({
-        updated_at: new Date().toISOString(),
-        uses: invite.uses + 1,
-      })
-      .where("code", "=", state.invite)
-      .execute();
-    await db.deleteFrom("members").where("id", "=", user.id).execute();
-    await db
-      .insertInto("members")
-      .values({
-        id: user.id,
-        invited_with: invite.id,
         joined_at: new Date().toISOString(),
       })
+      .where("id", "=", user.id)
       .execute();
     return ctx.text("Joined guild");
   }
