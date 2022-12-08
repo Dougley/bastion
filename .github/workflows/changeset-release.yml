@@ -26,6 +26,9 @@ jobs:
         with:
           node-version: 18.3
           cache: 'pnpm'
+      
+      - name: Install dependencies
+        run: pnpm install
 
       - name: Create Release Pull Request
         uses: changesets/action@v1
