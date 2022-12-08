@@ -26,7 +26,7 @@ importers:
     specifiers:
       '@cloudflare/workers-types': ^3.18.0
       '@types/service-worker-mock': ^2.0.1
-      database: workspace:^0.1.0
+      database: workspace:^0.2.0
       discord-api-types: ^0.37.18
       esbuild: ^0.14.8
       eslint-config-custom: workspace:*
@@ -64,7 +64,7 @@ importers:
       '@cloudflare/workers-types': ^3.18.0
       '@honojs/sentry': ^0.0.3
       '@types/service-worker-mock': ^2.0.1
-      database: workspace:^0.1.0
+      database: workspace:^0.2.0
       discord-api-types: ^0.37.20
       eslint-config-custom: workspace:*
       hono: ^2.5.7
