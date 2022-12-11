@@ -16,9 +16,9 @@ import {
 } from "slshx";
 
 export function blacklist(): CommandHandler<Env> {
-  useDescription("Whitelist someone.");
+  useDescription("Blacklist someone.");
   useDefaultPermission(false);
-  const user = useString("id", "The ID of the user to whitelist.", {
+  const user = useString("id", "The ID of the user to blacklist.", {
     required: true,
   });
   const confirm = useButton(async (interaction, env: Env, ctx) => {
