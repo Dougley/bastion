@@ -63,8 +63,7 @@ router.get("/", async (ctx) => {
   url.searchParams.set("state", state);
   url.searchParams.set("response_type", "code");
   const currentBase = ctx.env.DEV
-    // ? "http://localhost:8787"
-    ? "https://4496-178-85-145-59.eu.ngrok.io"
+    ? "http://localhost:8787"
     : new URL(ctx.req.url).origin;
   url.searchParams.set("redirect_uri", currentBase + "/discord/callback");
   return ctx.redirect(url.toString());
