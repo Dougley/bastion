@@ -1,5 +1,15 @@
 # invites
 
+## 0.3.0
+
+### Minor Changes
+
+- [`56e6072`](https://github.com/Dougley/bastion/commit/56e6072971e99b2cc479ccbf8bda130e24de3dfe) Thanks [@Dougley](https://github.com/Dougley)! - Set Discord metadata for linked roles
+
+### Patch Changes
+
+- [`88fe004`](https://github.com/Dougley/bastion/commit/88fe00462d75535cf012700c6af17e0f1db753f6) Thanks [@Dougley](https://github.com/Dougley)! - Move some routing to middleware
+
 ## 0.2.0
 
 ### Minor Changes
