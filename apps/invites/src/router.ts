@@ -9,6 +9,9 @@ import { importKey } from "./crypto/import";
 import { sign } from "./crypto/sign";
 import { APIUser } from "discord-api-types/v9";
 import { discordExchange } from "./middleware/discord-exchange";
+import { checkWhitelist } from "./middleware/whitelisting";
+import { joinGuild } from "./middleware/guild-join";
+import { setMetadata } from "./middleware/metadata-set";
 
 const router = new Hono<{ Bindings: Env }>();
 
@@ -60,7 +63,8 @@ router.get("/", async (ctx) => {
   url.searchParams.set("state", state);
   url.searchParams.set("response_type", "code");
   const currentBase = ctx.env.DEV
-    ? "http://localhost:8787"
+    // ? "http://localhost:8787"
+    ? "https://4496-178-85-145-59.eu.ngrok.io"
     : new URL(ctx.req.url).origin;
   url.searchParams.set("redirect_uri", currentBase + "/discord/callback");
   return ctx.redirect(url.toString());
@@ -70,57 +74,15 @@ router.get(
   "/discord/callback",
   verifyPayload(),
   discordExchange(),
+  checkWhitelist(),
+  joinGuild(),
+  setMetadata(),
   async (ctx) => {
     const db = new Kysely<Database>({
       dialect: new D1Dialect({ database: ctx.env.DB }),
     });
-    const access_token = ctx.get("access_token") as string;
     const user = ctx.get("user") as APIUser;
-    const member = await db
-      .selectFrom("members")
-      .select(["whitelisted", "blacklisted", "whitelisted_by"])
-      .where("id", "=", user.id)
-      .executeTakeFirst();
-    if (!member || !member.whitelisted || member.blacklisted) {
-      return ctx.text("You are not whitelisted", 403);
-    }
     const joined_at = new Date().toISOString();
-    const roleLink = await fetch(
-      `https://discord.com/api/v10/users/@me/applications/${ctx.env.DISCORD_CLIENT_ID}/role-connection`,
-      {
-        method: "PUT",
-        headers: {
-          authorization: `Bearer ${access_token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          platform_name: "Bastion Invites",
-          platform_username: user.username,
-          metadata: {
-            joined_at,
-          },
-        }),
-      }
-    );
-    if (!roleLink.ok) {
-      return ctx.text("Failed to link role", 500);
-    }
-    const guildJoin = await fetch(
-      `https://discord.com/api/guilds/${ctx.env.DISCORD_SERVER_ID}/members/${user.id}`,
-      {
-        method: "PUT",
-        headers: {
-          authorization: `Bot ${ctx.env.DISCORD_BOT_TOKEN}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          access_token: access_token,
-        }),
-      }
-    );
-    if (!guildJoin.ok) {
-      return ctx.text("Failed to join guild", 500);
-    }
     await db
       .updateTable("members")
       .set({

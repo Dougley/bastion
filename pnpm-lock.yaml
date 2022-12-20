@@ -65,7 +65,7 @@ importers:
       '@honojs/sentry': ^0.0.3
       '@types/service-worker-mock': ^2.0.1
       database: workspace:^0.2.0
-      discord-api-types: ^0.37.20
+      discord-api-types: ^0.37.24
       eslint-config-custom: workspace:*
       hono: ^2.5.7
       kysely: ^0.22.0
@@ -84,7 +84,7 @@ importers:
     devDependencies:
       '@cloudflare/workers-types': 3.18.0
       '@types/service-worker-mock': 2.0.1
-      discord-api-types: 0.37.20
+      discord-api-types: 0.37.24
       eslint-config-custom: link:../../packages/eslint-config-custom
       service-worker-mock: 2.0.5
       tsconfig: link:../../packages/tsconfig
@@ -1503,6 +1503,10 @@ packages:
 
   /discord-api-types/0.37.20:
     resolution: {integrity: sha512-uAO+55E11rMkYR36/paE1vKN8c2bZa1mgrIaiQIBgIZRKZTDIGOZB+8I5eMRPFJcGxrg16riUu+0aTu2JQEPew==}
+    dev: true
+
+  /discord-api-types/0.37.24:
+    resolution: {integrity: sha512-1+Fb4huJCihdbkJLcq2p7nBmtlmAryNwjefT8wwJnL8c7bc7WA87Oaa5mbLe96QvZyfwnwRCDX40H0HhcVV50g==}
     dev: true
 
   /doctrine/2.1.0:

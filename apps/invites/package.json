@@ -14,7 +14,7 @@
   "devDependencies": {
     "@cloudflare/workers-types": "^3.18.0",
     "@types/service-worker-mock": "^2.0.1",
-    "discord-api-types": "^0.37.20",
+    "discord-api-types": "^0.37.24",
     "eslint-config-custom": "workspace:*",
     "service-worker-mock": "^2.0.5",
     "tsconfig": "workspace:*",
