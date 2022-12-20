@@ -42,18 +42,22 @@ router.get("/", async (ctx) => {
     }),
     key
   );
-  url.searchParams.set("client_id", ctx.env.DISCORD_CLIENT_ID);
-  url.searchParams.set("scope", "identify guilds.join");
-  url.searchParams.set("prompt", "consent");
-  url.searchParams.set(
-    "state",
-    btoa(
-      JSON.stringify({
-        ts: Date.now(),
-        sig: sig,
-      })
-    )
+  const state = btoa(
+    JSON.stringify({
+      ts: Date.now(),
+      sig: sig,
+    })
   );
+  ctx.cookie("state", state, {
+    httpOnly: true,
+    secure: !ctx.env.DEV,
+    signed: true,
+    maxAge: 1000 * 60 * 5, // 5 minutes
+  });
+  url.searchParams.set("client_id", ctx.env.DISCORD_CLIENT_ID);
+  url.searchParams.set("scope", "identify guilds.join role_connections.write");
+  url.searchParams.set("prompt", "consent");
+  url.searchParams.set("state", state);
   url.searchParams.set("response_type", "code");
   const currentBase = ctx.env.DEV
     ? "http://localhost:8787"
@@ -80,6 +84,27 @@ router.get(
     if (!member || !member.whitelisted || member.blacklisted) {
       return ctx.text("You are not whitelisted", 403);
     }
+    const joined_at = new Date().toISOString();
+    const roleLink = await fetch(
+      `https://discord.com/api/v10/users/@me/applications/${ctx.env.DISCORD_CLIENT_ID}/role-connection`,
+      {
+        method: "PUT",
+        headers: {
+          authorization: `Bearer ${access_token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          platform_name: "Bastion Invites",
+          platform_username: user.username,
+          metadata: {
+            joined_at,
+          },
+        }),
+      }
+    );
+    if (!roleLink.ok) {
+      return ctx.text("Failed to link role", 500);
+    }
     const guildJoin = await fetch(
       `https://discord.com/api/guilds/${ctx.env.DISCORD_SERVER_ID}/members/${user.id}`,
       {
@@ -99,11 +124,12 @@ router.get(
     await db
       .updateTable("members")
       .set({
-        joined_at: new Date().toISOString(),
+        joined_at,
       })
       .where("id", "=", user.id)
+      .where("joined_at", "=", undefined)
       .execute();
-    return ctx.text("Joined guild");
+    return ctx.text("Done!");
   }
 );
 

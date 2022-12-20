@@ -5,10 +5,12 @@ import { verify } from "../crypto/verify";
 export function verifyPayload(): MiddlewareHandler<string, { Bindings: Env }> {
   return async (ctx, next) => {
     try {
-      const state = JSON.parse(atob(ctx.req.query("state")));
-      if (!state) {
+      const cookie = ctx.req.cookie("state");
+      const query = ctx.req.query("state");
+      if (!query || !cookie || query !== cookie) {
         return ctx.text("Invalid state", 400);
       }
+      const state = JSON.parse(atob(cookie));
       const timestamp = new Date(state.ts);
       // 5 minute expiry
       if (Date.now() - timestamp.getTime() > 1000 * 60 * 5) {
